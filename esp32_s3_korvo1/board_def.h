@@ -62,36 +62,23 @@
 #define CODEC_I2S_PORT              (0)
 #define CODEC_ADC_I2S_PORT          (1)
 #define CODEC_ADC_BITS_PER_SAMPLE   I2S_BITS_PER_SAMPLE_32BIT
-#define CODEC_ADC_SAMPLE_RATE       (16000)
+#define CODEC_ADC_SAMPLE_RATE       (48000)
 #define RECORD_HARDWARE_AEC         (true)
-#define BOARD_PA_GAIN               (6) /* Power amplifier gain defined by board (dB) */
+#define BOARD_PA_GAIN               (0) /* Power amplifier gain defined by board (dB) */
 
 extern audio_hal_func_t AUDIO_CODEC_ES8311_DEFAULT_HANDLE;
 extern audio_hal_func_t AUDIO_CODEC_ES7210_DEFAULT_HANDLE;
-
-#define AUDIO_CODEC_ES8311_CONFIG(){                    \
-        .adc_input  = AUDIO_HAL_ADC_INPUT_ALL,          \
+#define AUDIO_CODEC_DEFAULT_CONFIG(){                   \
+        .adc_input  = AUDIO_HAL_ADC_INPUT_LINE1,        \
         .dac_output = AUDIO_HAL_DAC_OUTPUT_ALL,         \
-        .codec_mode = AUDIO_HAL_CODEC_MODE_DECODE,        \
+        .codec_mode = AUDIO_HAL_CODEC_MODE_BOTH,        \
         .i2s_iface = {                                  \
             .mode = AUDIO_HAL_MODE_SLAVE,               \
             .fmt = AUDIO_HAL_I2S_NORMAL,                \
-            .samples = AUDIO_HAL_16K_SAMPLES,           \
+            .samples = AUDIO_HAL_48K_SAMPLES,           \
             .bits = AUDIO_HAL_BIT_LENGTH_16BITS,        \
         },                                              \
 };
-#define AUDIO_CODEC_ES7210_CONFIG(){                    \
-        .adc_input  = AUDIO_HAL_ADC_INPUT_ALL,          \
-        .dac_output = AUDIO_HAL_DAC_OUTPUT_ALL,         \
-        .codec_mode = AUDIO_HAL_CODEC_MODE_ENCODE,      \
-        .i2s_iface = {                                  \
-            .mode = AUDIO_HAL_MODE_SLAVE,              \
-            .fmt = AUDIO_HAL_I2S_NORMAL,                \
-            .samples = AUDIO_HAL_16K_SAMPLES,           \
-            .bits = AUDIO_HAL_BIT_LENGTH_32BITS,        \
-        },                                              \
-};
-
 
 /**
  * @brief Button Function Definition
