@@ -38,7 +38,7 @@ audio_board_handle_t audio_board_init(void) {
     ESP_LOGW(TAG, "The board has already been initialized!");
     return board_handle;
   }
-  board_handle = (audio_board_handle_t) audio_calloc(1, sizeof(struct audio_board_handle));
+  board_handle = (audio_board_handle_t) audio_hal_init(1, sizeof(struct audio_board_handle));
   AUDIO_MEM_CHECK(TAG, board_handle, return NULL);
   board_handle->audio_hal = audio_board_codec_init();
   board_handle->adc_hal = audio_board_adc_init();
@@ -115,7 +115,7 @@ esp_err_t audio_board_deinit(audio_board_handle_t audio_board)
     esp_err_t ret = ESP_OK;
     ret |= audio_hal_deinit(audio_board->audio_hal);
     ret |= audio_hal_deinit(audio_board->adc_hal);
-    audio_free(audio_board);
+    i2c_isr_free(audio_board);
     board_handle = NULL;
     return ret;
 }
