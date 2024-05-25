@@ -75,10 +75,6 @@ esp_err_t audio_board_get_volume(audio_board_handle_t board_handle, int *volume)
   return audio_hal_get_volume(board_handle->audio_hal, volume);
 }
 
-static esp_err_t _get_lcd_io_bus(void *bus, esp_lcd_panel_io_spi_config_t *io_config,
-                                 esp_lcd_panel_io_handle_t *out_panel_io) {
-  return esp_lcd_new_panel_io_spi((esp_lcd_spi_bus_handle_t) bus, io_config, out_panel_io);
-}
 esp_err_t audio_board_sdcard_init(esp_periph_set_handle_t set, periph_sdcard_mode_t mode)
 {
     if (mode != SD_MODE_1_LINE) {
